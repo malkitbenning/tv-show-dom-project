@@ -4,9 +4,12 @@
 
 .episodes-container {
   background-color: bisque;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
 }
 
 .episode-holder {
-  border: 3px solid red;
+  background-color: azure;
+  padding: 1rem;
 }

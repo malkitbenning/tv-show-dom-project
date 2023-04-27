@@ -39,11 +39,11 @@ function makePageForEpisodes(episodeList) {
     episodeCode.textContent = episodeCodeValue;
     episodeTitleArea.appendChild(episodeCode);
 
-    // image title area
+    // image area
 
-    let imageTitleArea = document.createElement("div");
-    imageTitleArea.classList.add("image-title-area");
-    episodeHolder.appendChild(imageTitleArea);
+    let imageArea = document.createElement("div");
+    imageArea.classList.add("image-area");
+    episodeHolder.appendChild(imageArea);
 
     // image - size medium
 
@@ -51,8 +51,38 @@ function makePageForEpisodes(episodeList) {
     let episodeImageMedium = document.createElement("img");
     episodeImageMedium.classList.add("episode-image-medium");
     episodeImageMedium.src = episodeImageMediumURL;
-    imageTitleArea.appendChild(episodeImageMedium);
-  }
+    episodeImageMedium.alt = "Screenshot from Game of Thrones episode";
+
+    imageArea.appendChild(episodeImageMedium);
+
+    // summary area
+
+    let summaryArea = document.createElement("div");
+    summaryArea.classList.add("summary-area");
+    episodeHolder.appendChild(summaryArea);
+
+    // episode summary
+
+    let episodeSummaryText = episode.summary;
+    let episodeSummaryPara = document.createElement("p");
+    episodeSummaryPara.classList.add("episode-summary-para");
+    episodeSummaryPara.textContent = episodeSummaryText;
+    summaryArea.appendChild(episodeSummaryPara);
+  } // close of main episodes for loop
+
+  // footer area
+  let footerArea = document.createElement("div");
+  footerArea.classList.add("footer-area");
+  rootElem.appendChild(footerArea);
+
+  // footer para
+
+  let footerURL = "https://www.tvmaze.com/";
+  let footerLink = document.createElement("a");
+  footerLink.classList.add("footer-link");
+  footerLink.href = footerURL;
+  footerLink.textContent = "copyright and data source credit to tvmaze.com";
+  footerArea.appendChild(footerLink);
   console.log(episodeList);
 }
 
