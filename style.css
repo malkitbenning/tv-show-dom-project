@@ -1,3 +1,12 @@
 #root {
-  color: red;
+  color: blue;
+}
+
+.episodes-container {
+  background-color: bisque;
+
+}
+
+.episode-holder {
+  border: 3px solid red;
 }
