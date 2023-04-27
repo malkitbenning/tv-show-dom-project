@@ -11,6 +11,7 @@ function makePageForEpisodes(episodeList) {
   let episodesContainer = document.createElement("div");
   episodesContainer.classList.add("episodes-container");
   rootElem.appendChild(episodesContainer);
+
   for (episode of episodeList) {
     let episodeHolder = document.createElement("div");
     episodeHolder.classList.add("episode-holder");
@@ -25,7 +26,7 @@ function makePageForEpisodes(episodeList) {
     // episode name
 
     let episodeName = document.createElement("span");
-    episodeName.classList.add("episode-name");
+    episodeName.classList.add("episode-title");
     episodeName.textContent = episode.name;
     episodeTitleArea.appendChild(episodeName);
 
@@ -35,7 +36,7 @@ function makePageForEpisodes(episodeList) {
     let episodeNumberPadded = episode.number.toString().padStart(2, "0");
     let episodeCodeValue = " - S" + seasonPadded + "E" + episodeNumberPadded;
     let episodeCode = document.createElement("span");
-    episodeCode.classList.add("episode-code");
+    episodeCode.classList.add("episode-title");
     episodeCode.textContent = episodeCodeValue;
     episodeTitleArea.appendChild(episodeCode);
 
