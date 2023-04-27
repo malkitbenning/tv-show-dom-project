@@ -4,10 +4,28 @@ function setup() {
   makePageForEpisodes(allEpisodes);
 }
 
+
+function searchFilter(episodeList) {
+  let searchString = document.getElementById("search-field");
+  console.log("value", searchString.value);
+
+  console.log("it's there");
+  if (searchString.value.length > 0) {
+    if (episodeList[0].name.includes(searchString.value)) {
+    }
+  }
+}
+
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-  console.log(episodeList[0].name);
+
+  let searchInput = document.createElement("input");
+  searchInput.classList.add("search-input");
+  searchInput.id = "search-field";
+  rootElem.appendChild(searchInput);
+  searchInput.addEventListener("input", searchFilter(episodeList));
+
   let episodesContainer = document.createElement("div");
   episodesContainer.classList.add("episodes-container");
   rootElem.appendChild(episodesContainer);

@@ -3,6 +3,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.search-input {
+  padding: 0.5rem;
+  margin: 1rem;
+}
 .episodes-container {
   background-color: rgb(63,73,82);
   display: grid;
