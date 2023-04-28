@@ -7,11 +7,25 @@ function setup() {
 
 function searchFilter(episodeList) {
   let searchString = document.getElementById("search-field");
-  console.log("value", searchString.value);
 
-  console.log("it's there");
+  allShows = document.querySelectorAll(".episode-holder");
+
   if (searchString.value.length > 0) {
-    if (episodeList[0].name.includes(searchString.value)) {
+    for (let i = 0; i < allShows.length; i++) {
+      let episodeName = episodeList[i].name;
+      let episodeSummary = episodeList[i].summary;
+      if (
+        episodeName.toLowerCase().includes(searchString.value.toLowerCase()) ||
+        episodeSummary.toLowerCase().includes(searchString.value.toLowerCase())
+      ) {
+        allShows[i].classList.remove("episode-hide");
+      } else {
+        allShows[i].classList.add("episode-hide");
+      }
+    }
+  } else {
+    for (let i = 0; i < allShows.length; i++) {
+      allShows[i].classList.remove("episode-hide");
     }
   }
 }
@@ -24,7 +38,9 @@ function makePageForEpisodes(episodeList) {
   searchInput.classList.add("search-input");
   searchInput.id = "search-field";
   rootElem.appendChild(searchInput);
-  searchInput.addEventListener("input", searchFilter(episodeList));
+  searchInput.addEventListener("input", function () {
+    searchFilter(episodeList);
+  });
 
   let episodesContainer = document.createElement("div");
   episodesContainer.classList.add("episodes-container");
@@ -102,7 +118,6 @@ function makePageForEpisodes(episodeList) {
   footerLink.href = footerURL;
   footerLink.textContent = "copyright and data source credit to tvmaze.com";
   footerArea.appendChild(footerLink);
-  console.log(episodeList);
 }
 
 window.onload = setup;

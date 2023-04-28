@@ -21,6 +21,10 @@
   border-radius: 10px;
 }
 
+.episode-hide {
+  display: none;
+}
+
 .episode-title-area {
   background-color: rgb(167,154,156);
   text-align: center;
