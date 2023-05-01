@@ -9,8 +9,9 @@ function searchFilter(episodeList) {
   let searchString = document.getElementById("search-field");
 
   allShows = document.querySelectorAll(".episode-holder");
-
+  showCounter = document.getElementById("search-counter");
   if (searchString.value.length > 0) {
+    let showingEpisodeCount = 0;
     for (let i = 0; i < allShows.length; i++) {
       let episodeName = episodeList[i].name;
       let episodeSummary = episodeList[i].summary;
@@ -18,21 +19,28 @@ function searchFilter(episodeList) {
         episodeName.toLowerCase().includes(searchString.value.toLowerCase()) ||
         episodeSummary.toLowerCase().includes(searchString.value.toLowerCase())
       ) {
-        allShows[i].classList.remove("episode-hide");
+        allShows[i].classList.remove("hide-it");
+        showingEpisodeCount++;
       } else {
-        allShows[i].classList.add("episode-hide");
+        allShows[i].classList.add("hide-it");
       }
     }
+    showCounter.textContent = `Showing ${showingEpisodeCount} episode(s) out of ${episodeList.length}`;
   } else {
+    showCounter.textContent = `Showing ${episodeList.length} episode(s) out of ${episodeList.length}`;
+
     for (let i = 0; i < allShows.length; i++) {
-      allShows[i].classList.remove("episode-hide");
+      allShows[i].classList.remove("hide-it");
     }
   }
 }
 
+// rootElem.textContent = `Showing ${episodeList.length} episode(s) out of ${episodeList.length}`;
+
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+
+  // search input box
 
   let searchInput = document.createElement("input");
   searchInput.classList.add("search-input");
@@ -41,6 +49,15 @@ function makePageForEpisodes(episodeList) {
   searchInput.addEventListener("input", function () {
     searchFilter(episodeList);
   });
+
+  // search counter
+
+  let searchCounterText = document.createElement("span");
+  searchCounterText.id = "search-counter";
+  rootElem.appendChild(searchCounterText);
+  searchCounterText.textContent = `Showing ${episodeList.length} episode(s) out of ${episodeList.length}`;
+
+  // episodes container
 
   let episodesContainer = document.createElement("div");
   episodesContainer.classList.add("episodes-container");
