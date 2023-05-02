@@ -36,8 +36,11 @@ function searchFilter(episodeList) {
 }
 
 // jump to episode
-function jumpToEpisode () {
-  alert("yeah");
+function jumpToEpisode() {
+  let selectList = document.getElementById("selection-list");
+  let position = selectList.value;
+  let selectedId = "episode-card" + position;
+  document.getElementById(selectedId).scrollIntoView();
 }
 
 // build selection list dropdown
@@ -68,7 +71,6 @@ function buildEpisodeDropdown(rootElem, episodeList) {
   listListener.addEventListener("change", jumpToEpisode);
 }
 
-
 // build search input box
 
 function buildSearchInput(rootElem, episodeList) {
@@ -97,9 +99,10 @@ function buildAllEpisodes(rootElem, episodeList) {
   episodesContainer.classList.add("episodes-container");
   rootElem.appendChild(episodesContainer);
 
-  for (const episode of episodeList) {
+  for (const [i, episode] of episodeList.entries()) {
     let episodeHolder = document.createElement("div");
     episodeHolder.classList.add("episode-holder");
+    episodeHolder.id = "episode-card" + i;
     episodesContainer.appendChild(episodeHolder);
 
     // episode title area
