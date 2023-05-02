@@ -35,13 +35,43 @@ function searchFilter(episodeList) {
   }
 }
 
-// rootElem.textContent = `Showing ${episodeList.length} episode(s) out of ${episodeList.length}`;
+// jump to episode
+function jumpToEpisode () {
+  alert("yeah");
+}
 
-function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
+// build selection list dropdown
 
-  // search input box
+function buildEpisodeDropdown(rootElem, episodeList) {
+  let episodeSelectionList = document.createElement("select");
+  episodeSelectionList.id = "selection-list";
+  rootElem.appendChild(episodeSelectionList);
 
+  for (let i = 0; i < episodeList.length; i++) {
+    let optionSeasonPadded = episodeList[i].season.toString().padStart(2, "0");
+    let optionEpisodeNumberPadded = episodeList[i].number
+      .toString()
+      .padStart(2, "0");
+    let optionCodeValue =
+      "S" + optionSeasonPadded + "E" + optionEpisodeNumberPadded + " - ";
+    let optionName = episodeList[i].name;
+
+    let episodeOptionContent = optionCodeValue + optionName;
+
+    let episodeOptionElement = document.createElement("option");
+    episodeOptionElement.textContent = episodeOptionContent;
+    episodeOptionElement.value = i;
+    episodeSelectionList.appendChild(episodeOptionElement);
+  }
+
+  let listListener = document.getElementById("selection-list");
+  listListener.addEventListener("change", jumpToEpisode);
+}
+
+
+// build search input box
+
+function buildSearchInput(rootElem, episodeList) {
   let searchInput = document.createElement("input");
   searchInput.classList.add("search-input");
   searchInput.id = "search-field";
@@ -49,21 +79,25 @@ function makePageForEpisodes(episodeList) {
   searchInput.addEventListener("input", function () {
     searchFilter(episodeList);
   });
+}
 
-  // search counter
+// build search counter
 
+function buildSearchCounter(rootElem, episodeList) {
   let searchCounterText = document.createElement("span");
   searchCounterText.id = "search-counter";
   rootElem.appendChild(searchCounterText);
   searchCounterText.textContent = `Showing ${episodeList.length} episode(s) out of ${episodeList.length}`;
+}
 
-  // episodes container
+// build all episodes
 
+function buildAllEpisodes(rootElem, episodeList) {
   let episodesContainer = document.createElement("div");
   episodesContainer.classList.add("episodes-container");
   rootElem.appendChild(episodesContainer);
 
-  for (episode of episodeList) {
+  for (const episode of episodeList) {
     let episodeHolder = document.createElement("div");
     episodeHolder.classList.add("episode-holder");
     episodesContainer.appendChild(episodeHolder);
@@ -113,28 +147,40 @@ function makePageForEpisodes(episodeList) {
     summaryArea.classList.add("summary-area");
     episodeHolder.appendChild(summaryArea);
 
-    // episode summary
+    // episode synopsis
 
     let episodeSummaryText = episode.summary;
     let episodeSummaryPara = document.createElement("p");
     episodeSummaryPara.classList.add("episode-summary-para");
     episodeSummaryPara.textContent = episodeSummaryText;
     summaryArea.appendChild(episodeSummaryPara);
-  } // close of main episodes for loop
+  } // close of main episodes FOR loop
+}
 
-  // footer area
+// build footer
+
+function buildFooter(rootElem) {
   let footerArea = document.createElement("div");
   footerArea.classList.add("footer-area");
   rootElem.appendChild(footerArea);
 
   // footer para
-
   let footerURL = "https://www.tvmaze.com/";
   let footerLink = document.createElement("a");
   footerLink.classList.add("footer-link");
   footerLink.href = footerURL;
   footerLink.textContent = "copyright and data source credit to tvmaze.com";
   footerArea.appendChild(footerLink);
+}
+
+function makePageForEpisodes(episodeList) {
+  const rootElem = document.getElementById("root");
+
+  buildEpisodeDropdown(rootElem, episodeList);
+  buildSearchInput(rootElem, episodeList);
+  buildSearchCounter(rootElem, episodeList);
+  buildAllEpisodes(rootElem, episodeList);
+  buildFooter(rootElem);
 }
 
 window.onload = setup;
