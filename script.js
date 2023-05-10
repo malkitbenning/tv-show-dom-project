@@ -258,6 +258,10 @@ function makeComponentsForShows(allShows) {
 
 function setup() {
   const allShows = getAllShows();
+  console.log(allShows);
+  allShows.sort(function (a, b) {
+    return a.name.localeCompare(b.name);
+  });
   makeComponentsForShows(allShows);
 }
 
