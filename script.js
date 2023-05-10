@@ -1,9 +1,19 @@
 //You can edit ALL of the code here
-function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+
+function getEpisodesFetch() {
+  // let number = numberInput.value;
+  fetch("https://api.tvmaze.com/shows/82/episodes")
+    // fetch("https://api.tvmaze.com/shows/527/episodes")
+    .then((response) => response.json())
+    .then((data) => {
+      makePageForEpisodes(data);
+    })
+    .catch((err) => console.log(err));
 }
 
+function setup() {
+  const allEpisodes = getEpisodesFetch();
+}
 
 function searchFilter(episodeList) {
   let searchString = document.getElementById("search-field");
