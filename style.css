@@ -3,6 +3,16 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.header-element{
+  display:flex;
+  justify-content: center;
+}
+
+.tag-line{
+  display:flex;
+  justify-content: center;
+}
+
 .search-input {
   padding: 0.5rem;
   margin: 1rem;
@@ -50,3 +60,8 @@
 .summary-area{
   margin: 2rem;
 }
+
+.footer-area{
+  margin: 4rem;
+}
+
