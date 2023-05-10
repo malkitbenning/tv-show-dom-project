@@ -1,9 +1,7 @@
 //You can edit ALL of the code here
 
-function getEpisodesFetch(tvShowNumber) {
-  // let number = numberInput.value;
+function fetchAndBuildEpisodes(tvShowNumber) {
   fetch("https://api.tvmaze.com/shows/" + tvShowNumber + "/episodes")
-    // fetch("https://api.tvmaze.com/shows/527/episodes")
     .then((response) => response.json())
     .then((data) => {
       makePageForEpisodes(data);
@@ -161,7 +159,8 @@ function buildAllEpisodes(showElem, episodeList) {
     let episodeSummaryText = episode.summary;
     let episodeSummaryPara = document.createElement("p");
     episodeSummaryPara.classList.add("episode-summary-para");
-    episodeSummaryPara.textContent = episodeSummaryText;
+    // episodeSummaryPara.textContent = episodeSummaryText;
+    episodeSummaryPara.innerHTML = episodeSummaryText;
     summaryArea.appendChild(episodeSummaryPara);
   } // close of main episodes FOR loop
 }
@@ -184,6 +183,7 @@ function buildFooter(rootElem) {
 
 function makePageForEpisodes(episodeList) {
   const showElem = document.getElementById("show-container");
+  showElem.innerHTML = "";
   buildEpisodeDropdown(showElem, episodeList);
   buildSearchInput(showElem, episodeList);
   buildSearchCounter(showElem, episodeList);
@@ -194,7 +194,12 @@ function makePageForEpisodes(episodeList) {
 function prepTheShow() {
   let selectTvShow = document.getElementById("tv-shows-list");
   let tvShowNumber = selectTvShow.value;
-  getEpisodesFetch(tvShowNumber);
+  if (tvShowNumber === "0") {
+    const showElem = document.getElementById("show-container");
+    showElem.innerHTML = "";
+  } else {
+    fetchAndBuildEpisodes(tvShowNumber);
+  }
 }
 
 // build tv shows list dropdown
@@ -204,6 +209,13 @@ function buildTVShowsDropdown(tvShowsSelectContainer, allShows) {
   tvShowsSelectionList.id = "tv-shows-list";
   tvShowsSelectContainer.appendChild(tvShowsSelectionList);
 
+  //add placeholder dropdown item
+  let placeholderOption = document.createElement("option");
+  placeholderOption.textContent = "please select a show";
+  placeholderOption.value = 0;
+  tvShowsSelectionList.appendChild(placeholderOption);
+
+  //add tv shows to dropdown
   for (let i = 0; i < allShows.length; i++) {
     let optionName = allShows[i].name;
     let optionShowId = allShows[i].id;
@@ -229,7 +241,7 @@ function buildWelcome(welcomeContainer) {
   welcomeContainer.appendChild(tagLineElem);
 }
 
-function makeComponentForShows(allShows) {
+function makeComponentsForShows(allShows) {
   const rootElem = document.getElementById("root");
   let welcomeContainer = document.createElement("div");
   rootElem.appendChild(welcomeContainer);
@@ -245,9 +257,8 @@ function makeComponentForShows(allShows) {
 }
 
 function setup() {
-  // const allEpisodes = getEpisodesFetch(100);
   const allShows = getAllShows();
-  makeComponentForShows(allShows);
+  makeComponentsForShows(allShows);
 }
 
 window.onload = setup;
