@@ -8,17 +8,6 @@
   justify-content: center;
 }
 
-.tv-show-card{
-  padding: 1rem;
-  border: 3px solid black;
-  border-radius: 10px;
-}
-
-.tv-show-details-area{
-  border: 1px dotted black;
-  display: grid;
-  grid-template-columns: 2fr 7fr 3fr;
-}
 .tag-line{
   display:flex;
   justify-content: center;
