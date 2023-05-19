@@ -45,6 +45,7 @@ function buildFooter(rootElem) {
 }
 
 function navigateToShow(showID) {
+  location.href = `oneShow.html?showID=${showID}`;
   // let tvDropdown = document.getElementById("tv-shows-dropdown");
   console.log(showID);
 }

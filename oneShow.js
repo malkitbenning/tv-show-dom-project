@@ -232,12 +232,11 @@ function buildTVShowsDropdown(tvShowsSelectContainer, allShows) {
 function buildWelcome(welcomeContainer) {
   const headerElem = document.createElement("h1");
   headerElem.classList.add("header-element");
-  headerElem.textContent = "TV Show Guide";
+  headerElem.textContent = "TV Show Episode Guide";
   welcomeContainer.appendChild(headerElem);
   const tagLineElem = document.createElement("p");
   tagLineElem.classList.add("tag-line");
-  tagLineElem.textContent =
-    "Choose a tv show from the list to see an episode breakdown";
+  tagLineElem.textContent = "Episode List breakdown";
   welcomeContainer.appendChild(tagLineElem);
 }
 
@@ -258,11 +257,15 @@ function makeComponentsForShows(allShows) {
 
 function setup() {
   const allShows = getAllShows();
-  console.log(allShows);
+  // console.log(allShows);
   allShows.sort(function (a, b) {
     return a.name.localeCompare(b.name);
   });
+  // console.log(window.location.search.substring(8));
+  let tvShowID = window.location.search.substring(8);
+
   makeComponentsForShows(allShows);
+  fetchAndBuildEpisodes(tvShowID);
 }
 
 window.onload = setup;
