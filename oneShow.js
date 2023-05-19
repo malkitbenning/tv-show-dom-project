@@ -51,6 +51,7 @@ function jumpToEpisode() {
 
 function buildEpisodeDropdown(showElem, episodeList) {
   let episodeSelectionList = document.createElement("select");
+  episodeSelectionList.classList.add("episodes-dropdown");
   episodeSelectionList.id = "selection-list";
   showElem.appendChild(episodeSelectionList);
 
@@ -190,45 +191,6 @@ function makePageForEpisodes(episodeList) {
   buildAllEpisodes(showElem, episodeList);
 }
 
-// show details of the selected tv show
-function prepTheShow() {
-  let selectTvShow = document.getElementById("tv-shows-list");
-  let tvShowNumber = selectTvShow.value;
-  if (tvShowNumber === "0") {
-    const showElem = document.getElementById("show-container");
-    showElem.innerHTML = "";
-  } else {
-    fetchAndBuildEpisodes(tvShowNumber);
-  }
-}
-
-// build tv shows list dropdown
-
-function buildTVShowsDropdown(tvShowsSelectContainer, allShows) {
-  let tvShowsSelectionList = document.createElement("select");
-  tvShowsSelectionList.id = "tv-shows-list";
-  tvShowsSelectContainer.appendChild(tvShowsSelectionList);
-
-  //add placeholder dropdown item
-  let placeholderOption = document.createElement("option");
-  placeholderOption.textContent = "please select a show";
-  placeholderOption.value = 0;
-  tvShowsSelectionList.appendChild(placeholderOption);
-
-  //add tv shows to dropdown
-  for (let i = 0; i < allShows.length; i++) {
-    let optionName = allShows[i].name;
-    let optionShowId = allShows[i].id;
-
-    let allShowsOptionElement = document.createElement("option");
-    allShowsOptionElement.textContent = optionName;
-    allShowsOptionElement.value = optionShowId;
-    tvShowsSelectionList.appendChild(allShowsOptionElement);
-  }
-  let tvShowsListener = document.getElementById("tv-shows-list");
-  tvShowsListener.addEventListener("change", prepTheShow);
-}
-
 function buildWelcome(welcomeContainer) {
   const headerElem = document.createElement("h1");
   headerElem.classList.add("header-element");
@@ -244,14 +206,26 @@ function makeComponentsForShows(allShows) {
   const rootElem = document.getElementById("root");
   let welcomeContainer = document.createElement("div");
   rootElem.appendChild(welcomeContainer);
+  buildWelcome(welcomeContainer);
+
+  let goBackBtnContainer = document.createElement("div");
+  goBackBtnContainer.classList.add("go-back-btn-container");
+  rootElem.appendChild(goBackBtnContainer);
+
+  let goBackBtn = document.createElement("button");
+  goBackBtn.classList.add("go-back-btn");
+  goBackBtn.innerText = "Choose another show";
+  goBackBtnContainer.appendChild(goBackBtn);
+  goBackBtn.addEventListener("click", () => {
+    location.href = `index.html`;
+  });
+
   let tvShowsSelectContainer = document.createElement("div");
   rootElem.appendChild(tvShowsSelectContainer);
-  let singleShowContainer = document.createElement("div");
-  singleShowContainer.id = "show-container";
-  rootElem.appendChild(singleShowContainer);
+  let showContainer = document.createElement("div");
+  showContainer.id = "show-container";
+  rootElem.appendChild(showContainer);
 
-  buildWelcome(welcomeContainer);
-  buildTVShowsDropdown(tvShowsSelectContainer, allShows);
   buildFooter(rootElem);
 }
 

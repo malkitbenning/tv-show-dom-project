@@ -46,8 +46,6 @@ function buildFooter(rootElem) {
 
 function navigateToShow(showID) {
   location.href = `oneShow.html?showID=${showID}`;
-  // let tvDropdown = document.getElementById("tv-shows-dropdown");
-  console.log(showID);
 }
 
 // populate tv shows dropdown
@@ -213,6 +211,7 @@ function buildTVDropdown(rootElem, allShows) {
   tvShowsSelectArea.id = "tv-series-select-area";
   rootElem.appendChild(tvShowsSelectArea);
   let tvShowsDropdownEl = document.createElement("select");
+  tvShowsDropdownEl.classList.add("shows-dropdown");
   tvShowsDropdownEl.id = "tv-shows-dropdown";
   tvShowsSelectArea.appendChild(tvShowsDropdownEl);
 }

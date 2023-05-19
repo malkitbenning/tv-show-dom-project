@@ -13,9 +13,25 @@
   justify-content: center;
 }
 
+.go-back-btn-container{
+  display: flex;
+  justify-content: center;
+}
+
+.go-back-btn{
+  font-size: large;
+  max-width: 200px;
+  
+}
+
+.episodes-dropdown {
+  font-size: large;
+}
+
 .search-input {
   padding: 0.5rem;
   margin: 1rem;
+  font-size: large;
 }
 .episodes-container {
   background-color: rgb(63,73,82);
@@ -24,6 +40,7 @@
   gap: 2rem;
   padding: 2rem;
 }
+
 
 .episode-holder {
   background-color: azure;
