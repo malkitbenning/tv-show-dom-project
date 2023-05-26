@@ -8,34 +8,24 @@
   justify-content: center;
 }
 
-.tv-show-card{
-  padding: 1rem;
-  border: 3px solid black;
-  border-radius: 10px;
-  margin: 1rem;
-}
-
-.tv-show-details-area{
-  border: 1px dotted black;
-  display: grid;
-  grid-template-columns: 2fr 7fr 3fr;
-}
-
-.tv-show-info-area{
-  margin: 1rem;
-  padding: 0.1rem 1rem;
-  border: 1px solid black;
-  border-radius: 10px;
-}
-
 .tag-line{
   display:flex;
   justify-content: center;
 }
 
-.shows-dropdown {
+.go-back-btn-container{
+  display: flex;
+  justify-content: center;
+}
+
+.go-back-btn{
   font-size: large;
-  margin: 1rem;
+  max-width: 200px;
+  
+}
+
+.episodes-dropdown {
+  font-size: large;
 }
 
 .search-input {
@@ -50,6 +40,7 @@
   gap: 2rem;
   padding: 2rem;
 }
+
 
 .episode-holder {
   background-color: azure;
@@ -81,13 +72,6 @@
   display: grid;
   align-items: center;
   justify-content: center;
-}
-
-
-.tv-show-image-medium{
-  margin: 10px;
-  border-radius: 10px;
-
 }
 
 .summary-area{
